@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>تقرير مشروع التخرج — عقارتي (Aqaraty) — الواجهة الخلفية</title>
+<style>
+  body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; line-height: 1.9; margin: 40px; color: #1a1a1a; }
+  h1,h2,h3 { margin: 0.6em 0 0.3em; }
+  h1 { font-size: 28px; color: #0f766e; }
+  h2 { font-size: 22px; color: #0e7490; border-right: 4px solid #0e7490; padding-right: 10px; }
+  h3 { font-size: 18px; color: #155e75; }
+  p { margin: 0.4em 0 0.8em; }
+  ul { margin: 0.2em 0 1em 0; }
+  code, pre { background: #f6f8fa; padding: 3px 6px; border-radius: 6px; }
+  .meta { background: #f0fdfa; border: 1px solid #99f6e4; padding: 12px 14px; border-radius: 10px; }
+  .section { margin-bottom: 22px; }
+  .small { color: #475569; font-size: 14px; }
+  a { color: #0ea5e9; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .kbd { background:#f1f5f9;padding:2px 6px;border-radius:6px;border:1px solid #e2e8f0 }
+</style>
+</head>
+<body>
+
+<h1>تقرير مشروع التخرج — <span class="small">Aqaraty (Back‑End)</span></h1>
+
+<div class="meta">
+  <strong>اسم المشروع:</strong> عقارتي — منصة للعقارات والخدمات المهنية<br>
+  <strong>الفترة:</strong> 2024–2025 — كلية تكنولوجيا المعلومات وهندسة الحاسوب، جامعة بوليتكنك فلسطين<br>
+  <strong>الدور:</strong> سيف الدين كومي — مطوّر واجهة خلفية (Back‑End)<br>
+  <strong>الواجهة الأمامية:</strong> حازم عميرة (React.js)<br>
+  <strong>المشرف:</strong> د. إزدهار جوابرة<br>
+  <strong>الموقع التجريبي:</strong> <a href="https://aqaraty.netlify.app" target="_blank">aqaraty.netlify.app</a><br>
+  <strong>المستودع (GitHub):</strong> <a href="https://github.com/s0if/Graduation-project" target="_blank">github.com/s0if/Graduation-project</a>
+</div>
+
+<div class="section">
+  <h2>ملخص تنفيذي</h2>
+  <p>يهدف مشروع <strong>عقارتي</strong> إلى ربط مالكي العقارات ومقدّمي الخدمات المهنية (كهربائيين، سباكين، مهندسين، …) بالمستخدمين في فلسطين عبر منصة موحّدة. هذا التقرير يعرّف بالمشروع ودوري فيه، ويستعرض التقنيات المستخدمة، أهم الميزات، أبرز التحديات التي واجهتها — خاصة وأنه أول مشروع حقيقي لي — ثم يذكر الدروس المتعلّمة وخطّة التحسين.</p>
+</div>
+
+<div class="section">
+  <h2>نظرة عامّة على الحل</h2>
+  <ul>
+    <li>تصميم واجهة خلفية <strong>ASP.NET Core 8</strong> مع <strong>Entity Framework Core 8</strong> و<strong>SQL Server</strong>.</li>
+    <li>تأمين الوصول عبر <strong>JWT</strong>، مع سياسات أدوار للتحكّم بالوصول.</li>
+    <li>رفع الملفات والصور باستخدام <strong>Azure Blob Storage</strong>.</li>
+    <li>مراسلة فورية (تشات/إشعارات) بواسطة <strong>SignalR</strong>.</li>
+    <li>توثيق تفاعلي للخدمات عبر <strong>Swagger</strong>.</li>
+    <li>تسجيل الأحداث باستخدام <strong>Serilog</strong>.</li>
+    <li>تحويل الكيانات و DTOs عبر <strong>Mapster</strong>.</li>
+    <li>طلبات HTTP داخلية عند الحاجة باستخدام <strong>RestSharp</strong>.</li>
+    <li>تطبيق قواعد التحقق باستخدام <strong>Scalar.AspNetCore</strong>.</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>البنية المعمارية والهيكل</h2>
+  <p>المشروع منظّم في طبقات واضحة (Controllers, Data, DTOs, Model, Service, Helpers, Error)، مع <span class="kbd">DbContext</span> لإدارة الوصول للبيانات، وطبقة خدمات تحتوي منطق الأعمال مثل <span class="kbd">AuthServices</span>، <span class="kbd">ChatHub</span>، <span class="kbd">WhatsAppService</span>، و<span class="kbd">ExtractClaims</span>. تدار الإعدادات من خلال <span class="kbd">appsettings.json</span>، وتتم تهيئة الاعتمادات (DI) في <span class="kbd">Program.cs</span>.</p>
+</div>
+
+<div class="section">
+  <h2>الميزات الأساسية وواجهات API</h2>
+  <ul>
+    <li><strong>الحسابات والصلاحيات:</strong> تسجيل/تسجيل دخول، إصدار JWT، سياسات للأدوار.</li>
+    <li><strong>الوحدات الرئيسية:</strong> خدمات، عقارات، إعلانات، إدارة مستخدمين، شكاوى.</li>
+    <li><strong>التوثيق:</strong> Swagger UI محلياً على <span class="kbd">/swagger</span>، ومجموعة Postman أولية للاختبار.</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>النشر والاستضافة</h2>
+  <p>تجهيز بيئة التطوير عبر ملفات <span class="kbd">launchSettings.json</span>، والقدرة على العمل محلياً باستخدام HTTPS/HTTP. التخزين السحابي للملفات عبر Azure Blob Storage، مع قابلية نقل الإعدادات إلى بيئة إنتاج لاحقاً.</p>
+</div>
+
+<div class="section">
+  <h2>التحديات والمشاكل (نقد ذاتي)</h2>
+  <ul>
+    <li><strong>جودة الكود (Clean Code):</strong> لكونه أول مشروع عملي، لم تكن معايير النظافة والاتساق مثالية (تسمية متغيّرات وطرق، تكرار أجزاء منطق في أكثر من موضع، وأحياناً منطق أعمال داخل Controllers).</li>
+    <li><strong>هيكلة بعض الملفات:</strong> كان يمكن فصل الاهتمامات بشكل أفضل بين الطبقات، وإزالة الاعتمادية الزائدة، مع توحيد أنماط الاستجابة (Response) والأخطاء.</li>
+    <li><strong>مجموعة Postman:</strong> غير منظّمة بأفضل صورة (مجلدات/بيئات/متغيّرات)، مما يصعّب مشاركة الاختبارات على الفريق.</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>ما تعلمته</h2>
+  <ul>
+    <li>التعامل العملي مع <strong>ASP.NET Core</strong> و<strong>EF Core</strong> و<strong>SQL Server</strong> لبناء RESTful APIs.</li>
+    <li>تطبيق <strong>JWT</strong> وسياسات الأدوار لحماية الواجهات.</li>
+    <li>العمل مع خدمات سحابية (Azure Blob Storage) و<strong>SignalR</strong> للزمن الحقيقي.</li>
+    <li>توثيق الخدمات عبر <strong>Swagger</strong> وتسجيل الأحداث بـ <strong>Serilog</strong>.</li>
+    <li>استخدام <strong>Mapster</strong> في فصل طبقات البيانات عن العرض.</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>خطة التحسين (Next Steps)</h2>
+  <ul>
+    <li>إعادة هيكلة تدريجية لتحسين <strong>Clean Code</strong> و<strong>SOLID</strong>:
+      <ul>
+        <li>توحيد التسمية (Naming) والالتزام بمبدأ <em>Single Responsibility</em>.</li>
+        <li>فصل منطق الأعمال تماماً عن Controllers، وتقليل التكرار (DRY).</li>
+        <li>اعتماد نمط ثابت لطبقة الاستجابة (Result/Envelope) ومعالجة الأخطاء بشكل موحّد.</li>
+      </ul>
+    </li>
+    <li>تنظيم <strong>Postman</strong>:
+      <ul>
+        <li>بناء مجلدات حسب المجالات (Auth, Properties, Services, Admin…).</li>
+        <li>استخدام Environments (Development/Production) ومتغيّرات للـ <span class="kbd">baseUrl</span> و <span class="kbd">token</span>.</li>
+        <li>إضافة Pre-request Scripts لاستخراج/تحديث JWT تلقائياً.</li>
+      </ul>
+    </li>
+    <li>تعزيز التحقق (Validation) وتغطية الاختبارات (وحدات/تكامل) حيثما أمكن.</li>
+    <li>تحسين التوثيق (Swagger) بإضافة أمثلة للطلبات/الاستجابات وتقسيم أوصاف النماذج.</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>روابط</h2>
+  <ul>
+    <li>GitHub: <a href="https://github.com/s0if/Graduation-project" target="_blank">https://github.com/s0if/Graduation-project</a></li>
+    <li>Swagger (محلي): <span class="kbd">http://localhost:5100/swagger</span></li>
+    <li>الموقع التجريبي: <a href="https://aqaraty.netlify.app" target="_blank">https://aqaraty.netlify.app</a></li>
+  </ul>
+</div>
+
+<p class="small">هذا التقرير مُعدّ بصيغة موجزة وواضحة ليُرفق كنموذج "نبذة عن المشروع" ضمن نماذج التقديم.</p>
+
+</body>
+</html>
